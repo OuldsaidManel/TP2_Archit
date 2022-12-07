@@ -1,5 +1,4 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,27 +27,26 @@ private IJournal journal;
 		
 		TypePackage p=TypePackage.valueOf(rs.getString(3));
 		Universite u = new Universite (rs.getInt(1),rs.getString(2),p);
-
+			
 		journal.outPut_Msg("LogBD : université récupérée");
-
-		//connect.close();
+		
 		return u;	
-
-
+		
 	}	
-
+	
 	@Override
 	public int GetNbLivreMensuel(Universite univ) throws SQLException {
-
+		
 		int nb = 0;
-
+		
 		if(univ.getPack() == TypePackage.Standard)   nb = 10;
 
 		if(univ.getPack() == TypePackage.Premium)    nb = 20;	
 
 		if(univ.getPack() == TypePackage.Unlimited)  nb = 9999999;
+		if(univ.getPack() == TypePackage.Unlimited)  nb = 0;
 
 		 return nb;
 	}
-
+	
 }
